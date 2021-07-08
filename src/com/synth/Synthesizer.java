@@ -1,9 +1,11 @@
 package com.synth;
 
+import com.synth.input.KeyListener;
 import com.synth.ui.MenuBarUI;
 import com.synth.ui.OscillatorUI;
 import javafx.application.Application;
 import javafx.scene.control.MenuBar;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,6 +49,8 @@ public class Synthesizer extends Application {
 
         // Finalize stage/scene
         Scene scene = new Scene(rootPane);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, KeyListener.keyHandler);
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, KeyListener.keyHandler);
         primaryStage.setTitle("HidoiSoun");
         primaryStage.setScene(scene);
         primaryStage.show();

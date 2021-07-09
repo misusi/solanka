@@ -17,9 +17,7 @@ public class WaveGenerator {
     ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
 
     public WaveGenerator() {
-
         String fileName = "sound.ogg";
-
     }
 
     private void beginOpenAL() {

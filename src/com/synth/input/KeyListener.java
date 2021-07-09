@@ -10,8 +10,7 @@ public class KeyListener {
     private static HashMap<Character, Boolean> KEY_CURRENTLY_PRESSED = new HashMap<>();
     private static int numKeysPressed = 0;
 
-    static
-    {
+    static {
         createKeyMappings();
     }
 
@@ -27,28 +26,29 @@ public class KeyListener {
 
     public static EventHandler<KeyEvent> keyHandler =
             keyEvent -> {
-                char keyChar = keyEvent.getText().charAt(0);
-                // Key not valid - return
-                if (KEY_FREQUENCIES.get(keyChar) == null) {
+//                 If no char
+                if (keyEvent.getText().isEmpty()) {
                     return;
                 }
-                // Key valid
-                else if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
-                    // Key already set as pressed - return
-                    if (KEY_CURRENTLY_PRESSED.get(keyChar) == true) {
-                        return;
+                char keyChar = keyEvent.getText().charAt(0);
+                // If key is valid
+                if (KEY_FREQUENCIES.get(keyChar) != null) {
+                    // Key press
+                    if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
+                        // Key already set as pressed - return
+                        if (KEY_CURRENTLY_PRESSED.get(keyChar) == true) {
+                            return;
+                        }
+                        KEY_CURRENTLY_PRESSED.put(keyChar,true);
+                        numKeysPressed++;
+                        System.out.println("Pressed " + keyChar);
                     }
-                    KEY_CURRENTLY_PRESSED.put(keyChar,true);
-                    numKeysPressed++;
-                    System.out.println("Pressed " + keyChar);
-                }
-                else if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
-                    KEY_CURRENTLY_PRESSED.put(keyChar, false);
-                    numKeysPressed--;
-                    System.out.println("Released " + keyChar);
-                }
-                else {
-                    // doesn't happen
+                    // Key release
+                    else if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+                        KEY_CURRENTLY_PRESSED.put(keyChar, false);
+                        numKeysPressed--;
+                        System.out.println("Released " + keyChar);
+                    }
                 }
                 System.out.println(numKeysPressed);
             };

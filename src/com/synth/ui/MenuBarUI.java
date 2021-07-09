@@ -7,7 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 
 public class MenuBarUI {
-    int MENUBAR_WIDTH = Synthesizer.SYNTH_WIDTH;
+    int MENUBAR_WIDTH = Synthesizer.AudioInfo.SYNTH_WIDTH;
     int MENUBAR_HEIGHT = 30;
     MenuBar menuBar = new MenuBar();
     Menu menuFile = new Menu("File");

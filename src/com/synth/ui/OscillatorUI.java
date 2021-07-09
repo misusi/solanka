@@ -1,31 +1,43 @@
 package com.synth.ui;
 
+import com.synth.Oscillator;
 import javafx.collections.FXCollections;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 
 import com.synth.audio.Wavetable;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
-public class OscillatorUI {
+public class OscillatorUI extends Oscillator {
     final int OSCILLATOR_WIDTH = 220;
     final int OSCILLATOR_HEIGHT = 120;
     final int PAD = 4;
 
     Pane pane = new Pane();
     Label oscillatorLabel;
+
+    // Volume Controls
     Label volumeLabel = new Label("Volume");
+    SpinnerValueFactory.IntegerSpinnerValueFactory volumeSpinnerValueFactory =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 100);
+    Spinner<Integer> volumeSpinner = new Spinner<Integer>(volumeSpinnerValueFactory);
+
+    // Pitch Controls
     Label pitchShiftLabel = new Label("Pitch Shift");
-    Spinner<Double> volumeSpinner = new Spinner<Double>();
-    Spinner<Double> pitchShiftSpinner = new Spinner<Double>();
+    SpinnerValueFactory.DoubleSpinnerValueFactory pitchShiftSpinnerValueFactory =
+            new SpinnerValueFactory.DoubleSpinnerValueFactory(-2.000d, 2.000d, 0.000d);
+    Spinner<Double> pitchShiftSpinner = new Spinner<Double>(pitchShiftSpinnerValueFactory);
+
     ChoiceBox<Wavetable> waveChoiceBox = new ChoiceBox<Wavetable>(FXCollections.observableArrayList( Wavetable.values()));
 
     public OscillatorUI(String label) {
         // Populate UI elements
         oscillatorLabel = new Label(label);
         waveChoiceBox.setValue(Wavetable.Sine);
+
 
         // Size elements
         pane.setPrefSize(OSCILLATOR_WIDTH, OSCILLATOR_HEIGHT);
@@ -64,10 +76,20 @@ public class OscillatorUI {
         Line bottom = new Line(OSCILLATOR_WIDTH,OSCILLATOR_HEIGHT,0,OSCILLATOR_HEIGHT);
         Line left = new Line(0,OSCILLATOR_HEIGHT,0,0);
 
+        connectUIToValues();
+
         // Add all elements to pane
         pane.getChildren().addAll(oscillatorLabel, volumeLabel, pitchShiftLabel, volumeSpinner,
                 pitchShiftSpinner, waveChoiceBox, top, right, bottom, left);
 
+    }
+
+    private void connectUIToValues() {
+        volumeSpinner.setEditable(true);
+        volumeSpinnerValueFactory.setAmountToStepBy(5);
+        pitchShiftSpinner.setEditable(true);
+        pitchShiftSpinnerValueFactory.setAmountToStepBy(0.05);
+//        pitchShiftSpinner.promptTextProperty().
     }
 
     public Pane getUIElement() {

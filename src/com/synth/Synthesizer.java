@@ -15,17 +15,21 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class Synthesizer extends Application {
-    public static final int SYNTH_WIDTH = 800;
-    public static final int SYNTH_HEIGHT = 542;
+    public static class AudioInfo {
+        public static final int SYNTH_WIDTH = 800;
+        public static final int SYNTH_HEIGHT = 542;
+        public static final int SAMPLE_RATE = 44100;
+    }
+    private final KeyListener keyListener = new KeyListener();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         // Set up root window
         Pane rootPane = new Pane();
-        rootPane.setMaxSize(SYNTH_WIDTH, SYNTH_HEIGHT);
-        rootPane.setMinSize(SYNTH_WIDTH, SYNTH_HEIGHT);
-        rootPane.setPrefSize(SYNTH_WIDTH, SYNTH_HEIGHT);
+        rootPane.setMaxSize(AudioInfo.SYNTH_WIDTH, AudioInfo.SYNTH_HEIGHT);
+        rootPane.setMinSize(AudioInfo.SYNTH_WIDTH, AudioInfo.SYNTH_HEIGHT);
+        rootPane.setPrefSize(AudioInfo.SYNTH_WIDTH, AudioInfo.SYNTH_HEIGHT);
 
         // Menu Bar
         rootPane.getChildren().add(new MenuBarUI().getUIElement());
@@ -47,10 +51,11 @@ public class Synthesizer extends Application {
         rootPane.getChildren().addAll(oscillator1.getUIElement(), oscillator2.getUIElement(), oscillator3.getUIElement(),
                 oscillator4.getUIElement());
 
+
         // Finalize stage/scene
         Scene scene = new Scene(rootPane);
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, KeyListener.keyHandler);
-        scene.addEventHandler(KeyEvent.KEY_RELEASED, KeyListener.keyHandler);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyListener.keyHandler);
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, keyListener.keyHandler);
         primaryStage.setTitle("HidoiSoun");
         primaryStage.setScene(scene);
         primaryStage.show();

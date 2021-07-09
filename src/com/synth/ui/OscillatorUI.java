@@ -85,9 +85,12 @@ public class OscillatorUI extends Oscillator {
     }
 
     private void connectUIToValues() {
-        volumeSpinner.setEditable(true);
+        volumeSpinner.setEditable(false);
         volumeSpinnerValueFactory.setAmountToStepBy(5);
-        pitchShiftSpinner.setEditable(true);
+//        volumeSpinnerValueFactory.valueProperty().addListener((arg0, arg1, arg2) ->
+//                groupSliderChange(fromLevel.getValue(),0));
+
+        pitchShiftSpinner.setEditable(false);
         pitchShiftSpinnerValueFactory.setAmountToStepBy(0.05);
 //        pitchShiftSpinner.promptTextProperty().
     }

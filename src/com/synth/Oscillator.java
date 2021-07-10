@@ -18,22 +18,16 @@ public class Oscillator {
     protected RefWrapper<Integer> volume = new RefWrapper<>(100);
     protected int freqMultiplier = 10000;
     protected Wavetable wavetable = Wavetable.Sine;
+    protected String name;
 
-//    private OscillatorUI ui = new OscillatorUI("Oscillator 1");
+    private OscillatorUI ui;
 
-    public Oscillator() {
-//        Utils.ParameterHandling.addParameterMouseListeners(toneParameter, this,
-//                -TONE_OFFSET_LIMIT, TONE_OFFSET_LIMIT, 1, toneOffset, () -> {
-//                    applyToneOffset();
-//                    toneParameter.setText(" x" + String.format("%.3f",getToneOffset()));
-//                    synth.updateWaveViewer();
-//                });
+    public Oscillator(String name) {
+        ui = new OscillatorUI(name);
+    }
 
-//        Utils.ParameterHandling.addParameterMouseListeners(volumeParameter, this, 0, 100, 1, volume, () -> {
-//            volumeParameter.setText(" " + volume.val + "% ");
-//            synth.updateWaveViewer();
-//        });
-
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getNextSample() {

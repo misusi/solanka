@@ -73,8 +73,6 @@ public class AudioThread extends Thread{
         alcCloseDevice(device);
     }
 
-
-
     synchronized void triggerPlayback() {
         running = true;
         notify();

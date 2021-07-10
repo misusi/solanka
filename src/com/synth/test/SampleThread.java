@@ -73,7 +73,6 @@ class SampleThread extends Thread {
             //Generate SINE_PACKET_SIZE samples based on the current fCycleInc from fFreq
             for (int i=0; i < SINE_PACKET_SIZE/SAMPLE_SIZE; i++) {
                 cBuf.putShort((short)(Short.MAX_VALUE * Math.sin(2*Math.PI * fCyclePosition)));
-
                 fCyclePosition += fCycleInc;
                 if (fCyclePosition > 1)
                     fCyclePosition -= 1;

@@ -21,6 +21,7 @@ public class Synthesizer extends Application {
         public static final int SAMPLE_RATE = 44100;
     }
     private final KeyListener keyListener = new KeyListener();
+    private Oscillator oscillator = new Oscillator();
 
     @Override
     public void start(Stage primaryStage) throws Exception {

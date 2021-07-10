@@ -12,7 +12,6 @@ public class KeyListener {
     private static HashMap<Character, Boolean> KEY_CURRENTLY_PRESSED = new HashMap<>();
     private static int numKeysPressed = 0;
 
-
     static {
         createKeyMappings();
     }
@@ -36,17 +35,6 @@ public class KeyListener {
                 char keyChar = keyEvent.getText().charAt(0);
                 // If key is valid
                 if (KEY_FREQUENCIES.get(keyChar) != null) {
-
-                    // TODO: Remove this
-//                    if (keyChar == 'j') {
-//                        if (!audioThread.isRunning()) {
-//                            for (Oscillator o : oscillators) {
-//                                o.setKeyFrequency(KEY_FREQUENCIES.get(e.getKeyChar()));
-//                            }
-//                            shouldGenerate = true;
-//                            audioThread.triggerPlayback();
-//                        }
-//                    }
 
                 // Key press
                 if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
